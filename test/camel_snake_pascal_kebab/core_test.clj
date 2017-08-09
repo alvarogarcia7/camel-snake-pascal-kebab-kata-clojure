@@ -10,8 +10,8 @@
         rest-words (rest words)
         rest-words-formatted (apply str (map capitalize rest-words))]
     (str
-              first-word
-              rest-words-formatted)))
+      first-word
+      rest-words-formatted)))
 (defn to-pascal-case [words]
   (let [words-formatted (apply str (map capitalize words))]
     words-formatted)
