@@ -18,5 +18,5 @@ In `dispatching/*` I have written different ways of dispatching the output forma
 
 source: trikitrok's https://gist.github.com/trikitrok/a97d330bacb1f56fe5ee027c12ff273a
 
-Warning: this kata is not finished.
+Warning: this kata is not finished, it does not include processing the data structures part
 
