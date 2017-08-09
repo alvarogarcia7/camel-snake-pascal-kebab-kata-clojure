@@ -6,10 +6,9 @@
        (apply str (rest word))))
 
 (defn to-camel-case [words]
-  (let [first-word (first words)
-        rest-words-formatted (apply str (map capitalize (rest words)))]
+  (let [rest-words-formatted (apply str (map capitalize (rest words)))]
     (str
-      first-word
+      (first words)
       rest-words-formatted)))
 (defn to-pascal-case [words]
   (let [words-formatted (apply str (map capitalize words))]
