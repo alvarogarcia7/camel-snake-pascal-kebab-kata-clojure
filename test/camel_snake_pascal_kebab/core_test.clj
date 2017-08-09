@@ -17,7 +17,10 @@
 (defn
   to-snake-case
   [words]
-  :hello_koko)
+  (->>
+    words
+    (map clojure.string/lower-case)
+    (clojure.string/join "_")))
 
 (defn format
   [input _ format-to]
