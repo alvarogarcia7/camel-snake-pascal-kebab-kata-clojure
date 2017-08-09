@@ -1,6 +1,7 @@
 (ns camel-snake-pascal-kebab.core-test
   (:require [clojure.test :refer :all]
-            [camel-snake-pascal-kebab.core :refer :all]))
+            [camel-snake-pascal-kebab.core :refer :all]
+            [midje.sweet :refer :all]))
 (defn capitalize [word]
   (str (Character/toUpperCase (first word))
        (apply str (rest word))))
