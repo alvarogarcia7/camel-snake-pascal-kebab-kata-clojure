@@ -55,10 +55,13 @@
 
 
 (def kebab-properties
-  (prop/for-all [names (gen/not-empty (gen/vector (gen/not-empty gen/string-alphanumeric)))]
-                (symbol? (format-words names :kebab-case)) => true ; is a symbol
-                (re-matches #"(\\S+-?)+" (name (format-words names :kebab-case))) => true ; follows the regex
-                ))
+  (prop/for-all
+    [names (gen/not-empty (gen/vector (gen/not-empty gen/string-alphanumeric)))]
+    (let [output (format-words names :kebab-case)]
+      ;(println (str names " got converted into " output))
+      (symbol? output) => true                              ; is a symbol
+      (re-matches #"(\\S+-?)+" (name output)) => true)      ; follows the regex
+    ))
 
 (facts
   "converting in different cases"
