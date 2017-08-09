@@ -7,8 +7,7 @@
 
 (defn to-camel-case [words]
   (let [first-word (first words)
-        rest-words (rest words)
-        rest-words-formatted (apply str (map capitalize rest-words))]
+        rest-words-formatted (apply str (map capitalize (rest words)))]
     (str
       first-word
       rest-words-formatted)))
