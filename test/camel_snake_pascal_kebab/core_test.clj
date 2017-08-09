@@ -22,9 +22,14 @@
     (map clojure.string/lower-case)
     (clojure.string/join "_")))
 
+(defn
+  words
+  [input]
+  (clojure.string/split (name input) #"-"))
+
 (defn format
   [input _ format-to]
-  (let [words (clojure.string/split (name input) #"-")]
+  (let [words (words input)]
     (keyword
       (cond
         (= format-to :camel-case) (to-camel-case words)
