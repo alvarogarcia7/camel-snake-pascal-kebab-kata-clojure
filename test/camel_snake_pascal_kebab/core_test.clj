@@ -25,7 +25,7 @@
 (defn
   words
   [input]
-  (clojure.string/split (name input) #"-"))
+  (re-seq #"[A-Z]?[a-z]+" (name input)))
 
 
 (defn format
@@ -53,4 +53,13 @@
     (format :Hello-Koko :using :snake-case) => :hello_koko)
   (fact
     "from kebab to pascal case"
-    (format :hello-koko :using :pascal-case) => :HelloKoko))
+    (format :hello-koko :using :pascal-case) => :HelloKoko)
+
+  (facts
+    "detect words in any input format"
+    (fact
+      "in camel case"
+      (words :helloWorld) => ["hello" "World"])
+    (fact
+      "in snake case"
+      (words :hello-world) => ["hello" "world"])))
