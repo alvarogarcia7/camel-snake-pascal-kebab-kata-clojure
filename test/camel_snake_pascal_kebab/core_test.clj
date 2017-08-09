@@ -60,8 +60,6 @@
                 (re-matches #"(\\S+-?)+" (name (format-words names :kebab-case))) => true ; follows the regex
                 ))
 
-(tc/quick-check 100 kebab-properties)
-
 (facts
   "converting in different cases"
   (fact
