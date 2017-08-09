@@ -5,27 +5,26 @@
   (str (Character/toUpperCase (first word))
                (apply str (rest word))))
 
-(defn to-camel-case [text]
-  (let [words (clojure.string/split (name text) #"-")
-        first-word (first words)
+(defn to-camel-case [words]
+  (let [first-word (first words)
         rest-words (rest words)
         rest-words-formatted (apply str (map format-word rest-words))]
     (keyword (str
                first-word
                rest-words-formatted))))
-(defn to-pascal-case [text]
-  (let [words (clojure.string/split (name text) #"-")
-        words-formatted (apply str (map format-word words))]
+(defn to-pascal-case [words]
+  (let [words-formatted (apply str (map format-word words))]
     (keyword words-formatted))
   )
 
 (defn format
   [input _ format-to]
-  (cond
-    (= format-to :camel-case) (to-camel-case input)
-    (= format-to :pascal-case) (to-pascal-case input)
-    :else :hello_koko
-    )
+  (let [words (clojure.string/split (name input) #"-")]
+    (cond
+      (= format-to :camel-case) (to-camel-case words)
+      (= format-to :pascal-case) (to-pascal-case words)
+      :else :hello_koko
+      ))
   )
 
 (facts
