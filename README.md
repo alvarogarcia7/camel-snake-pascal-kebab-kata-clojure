@@ -1,5 +1,7 @@
 # Camel, Snake, Pascal, Kebab case kata
 
+## Purpose
+
 This is a study (i.e., an etude) on how to dispatch to different functions coming from a string input
 
 source: trikitrok's https://gist.github.com/trikitrok/a97d330bacb1f56fe5ee027c12ff273a
