@@ -2,7 +2,10 @@
 
 ## Purpose
 
-This is a study (i.e., an etude) on how to dispatch to different functions coming from a string input
+This is a study (i.e., an etude), with a narrow target
+
+  * how to dispatch to different functions coming from a string input
+  * how to apply property-based testing (such as quickcheck)
 
 
 ## Dispatching
