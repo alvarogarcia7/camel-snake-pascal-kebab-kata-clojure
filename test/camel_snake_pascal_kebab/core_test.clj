@@ -31,7 +31,7 @@
   fn-by-name
   [fn-name]
   `(let [output-function-name# (symbol (str "to-" (name ~fn-name)))
-        output-function# (get (ns-publics 'camel-snake-pascal-kebab.core-test) output-function-name#)]
+        output-function# (get (ns-publics *ns*) output-function-name#)]
     output-function#))
 
 (defn format
