@@ -1,19 +1,19 @@
 (ns camel-snake-pascal-kebab.core-test
   (:require [clojure.test :refer :all]
             [camel-snake-pascal-kebab.core :refer :all]))
-(defn format-word [word]
+(defn capitalize [word]
   (str (Character/toUpperCase (first word))
                (apply str (rest word))))
 
 (defn to-camel-case [words]
   (let [first-word (first words)
         rest-words (rest words)
-        rest-words-formatted (apply str (map format-word rest-words))]
+        rest-words-formatted (apply str (map capitalize rest-words))]
     (keyword (str
                first-word
                rest-words-formatted))))
 (defn to-pascal-case [words]
-  (let [words-formatted (apply str (map format-word words))]
+  (let [words-formatted (apply str (map capitalize words))]
     (keyword words-formatted))
   )
 
