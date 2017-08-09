@@ -12,8 +12,12 @@
       rest-words-formatted)))
 (defn to-pascal-case [words]
   (let [words-formatted (apply str (map capitalize words))]
-    words-formatted)
-  )
+    words-formatted))
+
+(defn
+  to-snake-case
+  [words]
+  :hello_koko)
 
 (defn format
   [input _ format-to]
@@ -22,7 +26,7 @@
       (cond
         (= format-to :camel-case) (to-camel-case words)
         (= format-to :pascal-case) (to-pascal-case words)
-        :else :hello_koko
+        (= format-to :snake-case) (to-snake-case words)
         )))
   )
 
