@@ -14,7 +14,7 @@ In `dispatching/*` I have written different ways of dispatching the output forma
 
   * by-map: link a string to a function into a map
   * by-function-name: grab the function by its name, finding it in the namespace
-  * by-macro: expanding on the previous, using a macro
+  * by-macro: expanding on the previous, using a macro. The macro is not needed, just a scenario where to use it 
   * by-function-name-no-macro: expanding on the previous, using an ear-muff binding (`*ns*`) to refer to the current namespace
 
 ## Misc notes
