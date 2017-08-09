@@ -23,6 +23,14 @@
     (clojure.string/join "_")))
 
 (defn
+  to-kebab-case
+  [words]
+  (->>
+    words
+    (map clojure.string/lower-case)
+    (clojure.string/join "-")))
+
+(defn
   words
   [input]
   (re-seq #"[A-Z]?[a-z]+" (name input)))
@@ -54,6 +62,9 @@
   (fact
     "from kebab to pascal case"
     (format :hello-koko :using :pascal-case) => :HelloKoko)
+  (fact
+    "to kebab case"
+    (format :hello-koko :using :kebab-case) => :hello-koko)
 
   (facts
     "detect words in any input format"
