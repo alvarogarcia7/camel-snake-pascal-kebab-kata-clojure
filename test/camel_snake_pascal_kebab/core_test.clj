@@ -27,15 +27,17 @@
   [input]
   (clojure.string/split (name input) #"-"))
 
+(def
+  formats
+  {:camel-case to-camel-case
+   :pascal-case to-pascal-case
+   :snake-case to-snake-case})
+
 (defn format
   [input _ format-to]
   (let [words (words input)]
     (keyword
-      (cond
-        (= format-to :camel-case) (to-camel-case words)
-        (= format-to :pascal-case) (to-pascal-case words)
-        (= format-to :snake-case) (to-snake-case words)
-        )))
+      ((get formats format-to) words)))
   )
 
 (facts
