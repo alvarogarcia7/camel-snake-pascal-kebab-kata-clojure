@@ -27,17 +27,12 @@
   [input]
   (clojure.string/split (name input) #"-"))
 
-(defmacro
-  fn-by-name
-  [fn-name]
-  `(let [output-function-name# (symbol (str "to-" (name ~fn-name)))
-        output-function# (get (ns-publics *ns*) output-function-name#)]
-    output-function#))
 
 (defn format
   [input _ format-to]
   (let [words (words input)
-        output-function (fn-by-name format-to)]
+        function-name (symbol (str "to-" (name format-to)))
+        output-function (get (ns-publics *ns*) function-name)]
     (keyword
       (output-function words)))
   )
