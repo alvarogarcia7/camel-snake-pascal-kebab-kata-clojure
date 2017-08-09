@@ -65,4 +65,7 @@
       (words :hello-world) => ["hello" "world"])
     (fact
       "in pascal case"
-      (words :HelloWorld) => ["Hello" "World"])))
+      (words :HelloWorld) => ["Hello" "World"])
+    (fact
+      "in kebab case"
+      (words :hello-world) => ["hello" "world"])))
