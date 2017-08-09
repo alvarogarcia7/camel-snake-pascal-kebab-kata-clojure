@@ -1,7 +1,11 @@
 (ns camel-snake-pascal-kebab.core-test
   (:require [clojure.test :refer :all]
             [camel-snake-pascal-kebab.core :refer :all]
-            [midje.sweet :refer :all]))
+            [midje.sweet :refer :all]
+            [clojure.test.check.generators :as gen]
+            [clojure.test.check :as tc]
+            [clojure.test.check.properties :as prop]
+            ))
 (defn capitalize [word]
   (str (Character/toUpperCase (first word))
        (apply str (rest word))))
@@ -50,6 +54,14 @@
   (format-words (words input) format-to))
 
 
+(def kebab-properties
+  (prop/for-all [names (gen/not-empty (gen/vector (gen/not-empty gen/string-alphanumeric)))]
+                (symbol? (format-words names :kebab-case)) => true ; is a symbol
+                (re-matches #"(\\S+-?)+" (name (format-words names :kebab-case))) => true ; follows the regex
+                ))
+
+(tc/quick-check 100 kebab-properties)
+
 (facts
   "converting in different cases"
   (fact
@@ -72,6 +84,7 @@
     (format :hello-koko :using :kebab-case) => :hello-koko
     (format-words ["hello" "kokO"] :kebab-case) => :hello-koko
     (format-words ["HELLO" "KOKO"] :kebab-case) => :hello-koko
+    (:result (tc/quick-check 100 kebab-properties)) => true
     )
 
   (facts
