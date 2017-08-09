@@ -29,13 +29,12 @@
 
 (defn format
   [input _ format-to]
-  (let [words (words input)]
+  (let [words (words input)
+        output-function-name (symbol (str "to-" (name format-to)))
+        output-function (get (ns-publics 'camel-snake-pascal-kebab.core-test)
+                   output-function-name)]
     (keyword
-      (cond
-        (= format-to :camel-case) (to-camel-case words)
-        (= format-to :pascal-case) (to-pascal-case words)
-        (= format-to :snake-case) (to-snake-case words)
-        )))
+      (output-function words)))
   )
 
 (facts
