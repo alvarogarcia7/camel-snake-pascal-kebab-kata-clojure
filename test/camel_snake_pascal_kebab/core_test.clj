@@ -36,13 +36,17 @@
   (re-seq #"[A-Z]?[a-z]+" (name input)))
 
 
-(defn format
-  [input _ format-to]
-  (let [words (words input)
-        function-name (symbol (str "to-" (name format-to)))
+(defn format-words
+  [words format-to]
+  (let [function-name (symbol (str "to-" (name format-to)))
         output-function (get (ns-publics *ns*) function-name)]
     (keyword
       (output-function words))))
+
+(defn
+  format
+  [input _ format-to]
+  (format-words (words input) format-to))
 
 
 (facts
@@ -64,7 +68,10 @@
     (format :hello-koko :using :pascal-case) => :HelloKoko)
   (fact
     "to kebab case"
-    (format :hello-koko :using :kebab-case) => :hello-koko)
+    (format :hello-koko :using :kebab-case) => :hello-koko
+    (format-words ["hello" "kokO"] :kebab-case) => :hello-koko
+    (format-words ["HELLO" "KOKO"] :kebab-case) => :hello-koko
+    )
 
   (facts
     "detect words in any input format"
