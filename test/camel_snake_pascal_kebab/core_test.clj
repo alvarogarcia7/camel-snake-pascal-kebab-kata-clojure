@@ -21,11 +21,12 @@
 
 (defn format
   [input _ format-to]
-  (if (= format-to :camel-case)
-    (to-camel-case input)
-    (if (= format-to :pascal-case)
-      (to-pascal-case input)
-      :hello_koko)))
+  (cond
+    (= format-to :camel-case) (to-camel-case input)
+    (= format-to :pascal-case) (to-pascal-case input)
+    :else :hello_koko
+    )
+  )
 
 (facts
   "converting in different cases"
