@@ -34,8 +34,7 @@
         function-name (symbol (str "to-" (name format-to)))
         output-function (get (ns-publics *ns*) function-name)]
     (keyword
-      (output-function words)))
-  )
+      (output-function words))))
 
 
 (facts
