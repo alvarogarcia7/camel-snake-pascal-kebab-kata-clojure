@@ -6,6 +6,20 @@
             [clojure.test.check :as tc]
             [clojure.test.check.properties :as prop]
             ))
+
+(defn
+  verify
+  [property]
+  (let [result (tc/quick-check 100 property)]
+    (if (not (true? (:result result)))
+      (do
+        (println (str "the input '" (get-in result [:fail 0]) "' failed"))
+        (println (str "investigate: '" (get-in result [:shrunk :smallest 0]) "'"))
+        (println result)
+        ))
+    (fact
+      (:result result) => true)
+    result))
 (defn capitalize [word]
   (str (Character/toUpperCase (first word))
        (apply str (rest word))))
@@ -62,10 +76,11 @@
           n-minus-1-words (dec (count names))
           expected-length (+ n-minus-1-words length-of-words)]
       ;(println (str names " got converted into " output))
-      (symbol? output) => true                              ; is a symbol
-      (re-matches #"(\\S+-?)+" (name output)) => true       ; follows the regex
-      (= (count (name output)) expected-length) => true     ; has the correct length
-      (not-any? #(Character/isUpperCase %) (name output)) => true ;
+      (keyword? (name output))
+      ;(fact "follows the regex"
+      ;      (re-matches #"(\\S+-?)+" (name output)) => true)
+      ;(count (name output)) => (inc (inc expected-length))  ; has the correct length
+      ;(not-any? #(Character/isUpperCase %) (name output)) => true ;
       ; has no
       ; lowercase
       )))
@@ -92,8 +107,11 @@
     (format :hello-koko :using :kebab-case) => :hello-koko
     (format-words ["hello" "kokO"] :kebab-case) => :hello-koko
     (format-words ["HELLO" "KOKO"] :kebab-case) => :hello-koko
-    (:result (tc/quick-check 100 kebab-properties)) => true
+    (verify kebab-properties)
     )
+
+
+  ;(tc/quick-check 100 prop-sorted-first-less-than-last)
 
   (facts
     "detect words in any input format"
