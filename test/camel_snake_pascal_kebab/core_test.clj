@@ -64,8 +64,11 @@
       ;(println (str names " got converted into " output))
       (symbol? output) => true                              ; is a symbol
       (re-matches #"(\\S+-?)+" (name output)) => true       ; follows the regex
-      (= (count (name output)) expected-length))            ; has the correct length
-    ))
+      (= (count (name output)) expected-length) => true     ; has the correct length
+      (not-any? #(Character/isUpperCase %) (name output)) => true ;
+      ; has no
+      ; lowercase
+      )))
 
 (facts
   "converting in different cases"
