@@ -68,7 +68,7 @@
   (format-words (words input) format-to))
 
 
-(def kebab-properties
+(def kebab-is-a-keyword-property
   (prop/for-all
     [names (gen/not-empty (gen/vector (gen/not-empty gen/string-alphanumeric)))]
     (let [output (format-words names :kebab-case)
@@ -107,7 +107,7 @@
     (format :hello-koko :using :kebab-case) => :hello-koko
     (format-words ["hello" "kokO"] :kebab-case) => :hello-koko
     (format-words ["HELLO" "KOKO"] :kebab-case) => :hello-koko
-    (verify kebab-properties)
+    (verify kebab-is-a-keyword-property)
     )
 
 
