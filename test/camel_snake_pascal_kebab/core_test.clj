@@ -57,10 +57,12 @@
 (def kebab-properties
   (prop/for-all
     [names (gen/not-empty (gen/vector (gen/not-empty gen/string-alphanumeric)))]
-    (let [output (format-words names :kebab-case)]
+    (let [output (format-words names :kebab-case)
+          expected-length (+ (dec (count names)) (apply + (map count names)))]
       ;(println (str names " got converted into " output))
       (symbol? output) => true                              ; is a symbol
-      (re-matches #"(\\S+-?)+" (name output)) => true)      ; follows the regex
+      (re-matches #"(\\S+-?)+" (name output)) => true       ; follows the regex
+      (= (count (name output)) expected-length))            ; has the correct length
     ))
 
 (facts
