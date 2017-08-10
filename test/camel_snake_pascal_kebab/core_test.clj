@@ -58,7 +58,9 @@
   (prop/for-all
     [names (gen/not-empty (gen/vector (gen/not-empty gen/string-alphanumeric)))]
     (let [output (format-words names :kebab-case)
-          expected-length (+ (dec (count names)) (apply + (map count names)))]
+          length-of-words (apply + (map count names))
+          n-minus-1-words (dec (count names))
+          expected-length (+ n-minus-1-words length-of-words)]
       ;(println (str names " got converted into " output))
       (symbol? output) => true                              ; is a symbol
       (re-matches #"(\\S+-?)+" (name output)) => true       ; follows the regex
