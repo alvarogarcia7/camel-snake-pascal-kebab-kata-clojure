@@ -72,11 +72,12 @@
   (prop/for-all
     [names (gen/not-empty (gen/vector (gen/not-empty gen/string-alphanumeric)))]
     (let [output (format-words names :kebab-case)
-          length-of-words (apply + (map count names))
-          n-minus-1-words (dec (count names))
-          expected-length (+ n-minus-1-words length-of-words)]
-      ;(println (str names " got converted into " output))
-      (keyword? (name output))
+          ;length-of-words (apply + (map count names))
+          ;n-minus-1-words (dec (count names))
+          ;expected-length (+ n-minus-1-words length-of-words)
+          ]
+      ;(println names (str "got converted into " output))
+      (keyword? output)
       ;(fact "follows the regex"
       ;      (re-matches #"(\\S+-?)+" (name output)) => true)
       ;(count (name output)) => (inc (inc expected-length))  ; has the correct length
