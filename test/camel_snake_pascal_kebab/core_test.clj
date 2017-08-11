@@ -67,6 +67,10 @@
   [input _ format-to]
   (format-words (words input) format-to))
 
+(defn
+  is-deep?
+  [coll]
+  (or (some true? (map coll? coll)) false))
 
 (def kebab-is-a-keyword-property
   (prop/for-all
@@ -128,3 +132,14 @@
     (fact
       "in kebab case"
       (words :hello-world) => ["hello" "world"])))
+
+(facts
+  "about deepness helper"
+  (fact
+    "an array of elements (except arrays) is shallow"
+    (is-deep? ["a"]) => false
+    (is-deep? ["a" "b"]) => false
+    )
+  (fact
+    "an array of array elements is not shallow (i.e., deep)"
+    (is-deep? [["a"]]) => true))
