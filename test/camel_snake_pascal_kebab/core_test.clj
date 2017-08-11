@@ -90,6 +90,17 @@
       ; lowercase
       )))
 
+(def kebab-count-property
+  (prop/for-all
+    [names (gen/not-empty (gen/vector (gen/not-empty gen/string-alphanumeric)))]
+    (let [output (format-words names :kebab-case)
+          length-of-words (apply + (map count names))
+          n-minus-1-words (dec (count names))
+          expected-length (+ n-minus-1-words length-of-words)
+          ]
+      (= (count (name output)) expected-length) ; has the correct length
+      )))
+
 (facts
   "converting in different cases"
   (fact
@@ -113,6 +124,8 @@
     (format-words ["hello" "kokO"] :kebab-case) => :hello-koko
     (format-words ["HELLO" "KOKO"] :kebab-case) => :hello-koko
     (verify kebab-is-a-keyword-property)
+    ;(verify kebab-follows-the-regex-property)
+    (verify kebab-count-property)
     )
 
 
