@@ -66,7 +66,9 @@
   format
   [input using format-to]
   (if (coll? input)
-    (map #(format % using format-to) input)
+    (if (vector? input)
+      (vec (map #(format % using format-to) input))
+      (map #(format % using format-to) input))
     (format-words (words input) format-to)))
 
 (defn
@@ -153,7 +155,12 @@
     "about structures"
     (fact
       "convert all the element in a list"
-      (format '(:hello-world :hello-koko) :using :snake-case) => '(:hello_world :hello_koko))))
+      (format '(:hello-world :hello-koko) :using :snake-case) => '(:hello_world :hello_koko))
+    (fact
+      "convert all the element in an array"
+      (format [:hello-world :hello-koko] :using :snake-case) => [:hello_world :hello_koko]
+      (vector? (format [:hello-world :hello-koko] :using :snake-case)) => true
+      )))
 
 (facts
   "about deepness helper"
