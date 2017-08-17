@@ -66,9 +66,8 @@
   format
   [input using format-to]
   (if (coll? input)
-    (if (vector? input)
-      (vec (map #(format % using format-to) input))
-      (map #(format % using format-to) input))
+    (let [output (map #(format % using format-to) input)]
+      (if (vector? input) (vec output) output))
     (format-words (words input) format-to)))
 
 (defn
